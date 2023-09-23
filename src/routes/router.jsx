@@ -1,0 +1,13 @@
+
+import { Navigate, createBrowserRouter } from 'react-router-dom';
+import Main from '../layout/main';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main></Main>,
+    
+  },
+]);
+
+export default router;
