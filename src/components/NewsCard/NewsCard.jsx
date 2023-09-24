@@ -1,9 +1,13 @@
+import moment from "moment/moment";
 import { Button, Card } from "react-bootstrap";
-import { FaRegBookmark, FaShareAlt } from "react-icons/fa";
+import { FaRegBookmark, FaShareAlt, FaEye, FaRegStar, FaStar } from "react-icons/fa";
+import Rating from "react-rating";
+import { Link } from "react-router-dom";
 
 const NewsCard = ({ news }) => {
-  const { title, details, image_url } = news;
-  const { img, name, published_date } = news.author;
+  const { _id, title, details, image_url, author, total_view, rating } = news;
+  const { img, name, published_date } = author;
+  const { number } = rating;
   return (
     <div>
       <Card className=" mb-3">
@@ -22,7 +26,10 @@ const NewsCard = ({ news }) => {
               <div>
                 <span>{name}</span>
                 <br />
-                <span>{published_date}</span>
+                <span>
+                  {moment(published_date).format("YYYY-MM-D,  ")}
+                  {moment(published_date, "YYYYMMDD").fromNow()}
+                </span>
               </div>
             </div>
             <div>
@@ -37,11 +44,30 @@ const NewsCard = ({ news }) => {
           </Card.Title>
           <Card.Text>
             <img className="img-fluid" src={image_url} alt="" />
-            <p className="text-justify">{details.slice(0, 200)}</p>
-            <button className="btn btn-link">Read More</button>
+            <p className="text-justify">
+              {details.slice(0, 250)}...
+              <Link to={`/news/${_id}`}>
+                <span>Read More</span>
+              </Link>
+            </p>
           </Card.Text>
         </Card.Body>
-        <Card.Footer className="text-muted">2 days ago</Card.Footer>
+        <Card.Footer className="text-muted d-flex align-items-center">
+          <div className="flex-grow-1">
+            <Rating
+              readonly
+              placeholderRating={number}
+              emptySymbol={<FaRegStar />}
+              placeholderSymbol={<FaStar />}
+              fullSymbol={<FaStar />}
+              className="me-2 text-danger"
+            />
+            <span>{number}</span>
+          </div>
+          <div>
+            <FaEye /> {total_view}
+          </div>
+        </Card.Footer>
       </Card>
     </div>
   );

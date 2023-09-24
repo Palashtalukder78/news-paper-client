@@ -5,6 +5,7 @@ import LeftNav from "../components/shared/Navs/LeftNav/LeftNav";
 import RightNav from "../components/shared/Navs/RightNav/RightNav";
 import Footer from "../components/shared/Footer/Footer";
 import { Outlet } from "react-router-dom";
+import Category from "../components/Category/Category";
 
 const Main = () => {
     return (
