@@ -6,10 +6,12 @@ const LeftNav = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(()=>{
-    fetch("http://localhost:5000/category")
-    .then(res=>res.json())
-    .then(data=>setCategories(data))
-    .catch(error=> console.log(error.message))
+    fetch(
+      "https://news-paper-server-gdh8uygtg-md-ariful-islam-palashs-projects.vercel.app/category"
+    )
+      .then((res) => res.json())
+      .then((data) => setCategories(data))
+      .catch((error) => console.log(error.message));
   },[])
 
   const itemStyle = {
